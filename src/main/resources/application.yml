@@ -1,0 +1,37 @@
+server:
+  port: 9192
+spring:
+  application:
+    name: OpenAI-MessageRoles_and_Prompting
+  ai:
+    openai:
+      api-key: ${openAI_Key}
+      chat:
+        options:
+          model: gpt-4o-mini
+          temperature: 0.6
+    chat:
+      memory:
+        repository:
+          jdbc:
+            initialize-schema: always
+    vectorstore:
+      qdrant:
+        initialize-schema: true
+        host: localhost
+        port: 6334
+        collection-name: eazyBytes
+  datasource:
+    username: root
+    password: 1234
+    url: jdbc:mysql://localhost/OpenAIDemo
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  docker:
+    compose:
+      stop:
+        command: down
+  
+
+logging:
+  level:
+    '[org.springframework.ai.chat.client.advisor]': DEBUG
